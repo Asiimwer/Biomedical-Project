@@ -1,0 +1,653 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated hospital BEMS user profile with RBAC role assignment.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 254
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "Administrator",
+            "Biomedical Engineer",
+            "Department Personnel",
+            "Read-Only/Auditor"
+          ],
+          "maxLength": 40
+        },
+        "department": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "email",
+        "displayName",
+        "role",
+        "department",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "EquipmentAsset": {
+      "title": "EquipmentAsset",
+      "description": "Registered biomedical medical device record.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "assetId": {
+          "type": "string",
+          "pattern": "^[A-Z0-9\\-]+$",
+          "maxLength": 32
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "manufacturer": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "model": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "serialNumber": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "department": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "location": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "condition": {
+          "type": "string",
+          "enum": [
+            "Excellent",
+            "Good",
+            "Fair",
+            "Needs Repair",
+            "Unserviceable"
+          ],
+          "maxLength": 32
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Operational",
+            "Faulty",
+            "Under Maintenance",
+            "Awaiting Inspection",
+            "Decommissioned"
+          ],
+          "maxLength": 32
+        },
+        "responsibleParty": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "lastHandler": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "lastMovementAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "acquisitionDate": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "lastServiceDate": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "nextServiceDate": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "lastUpdated": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "ownerUid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "assetId",
+        "name",
+        "category",
+        "manufacturer",
+        "model",
+        "serialNumber",
+        "department",
+        "location",
+        "condition",
+        "status",
+        "responsibleParty",
+        "lastHandler",
+        "lastMovementAt",
+        "acquisitionDate",
+        "lastServiceDate",
+        "nextServiceDate",
+        "lastUpdated",
+        "notes",
+        "ownerUid",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "EquipmentMovement": {
+      "title": "EquipmentMovement",
+      "description": "Chain-of-custody movement and transfer record between hospital locations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "equipmentId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "assetId": {
+          "type": "string",
+          "pattern": "^[A-Z0-9\\-]+$",
+          "maxLength": 32
+        },
+        "equipmentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "originDepartment": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "originLocation": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "destinationDepartment": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "destinationLocation": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "authorizingPerson": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "releasingPerson": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "receivingPerson": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "movementDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "expectedReturnDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "actualReturnDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending Approval",
+            "Released",
+            "In Transit",
+            "Received",
+            "Returned",
+            "Overdue"
+          ],
+          "maxLength": 32
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "ownerUid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "equipmentId",
+        "assetId",
+        "equipmentName",
+        "originDepartment",
+        "originLocation",
+        "destinationDepartment",
+        "destinationLocation",
+        "authorizingPerson",
+        "releasingPerson",
+        "receivingPerson",
+        "movementDate",
+        "expectedReturnDate",
+        "actualReturnDate",
+        "status",
+        "notes",
+        "ownerUid",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MaintenanceTask": {
+      "title": "MaintenanceTask",
+      "description": "Preventive, corrective, calibration, or safety inspection maintenance task.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "equipmentId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "assetId": {
+          "type": "string",
+          "pattern": "^[A-Z0-9\\-]+$",
+          "maxLength": 32
+        },
+        "equipmentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Preventive Maintenance",
+            "Corrective Maintenance",
+            "Inspection",
+            "Calibration",
+            "Safety Testing"
+          ],
+          "maxLength": 40
+        },
+        "lastMaintenanceDate": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "nextMaintenanceDate": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "assignedEngineer": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "maxLength": 20
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Scheduled",
+            "In Progress",
+            "Completed",
+            "Overdue",
+            "Awaiting Parts"
+          ],
+          "maxLength": 32
+        },
+        "instructions": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "workPerformed": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "faultsDiscovered": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "partsReplaced": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "completionDate": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "completedBy": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "postCondition": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "recommendations": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "ownerUid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "equipmentId",
+        "assetId",
+        "equipmentName",
+        "type",
+        "lastMaintenanceDate",
+        "nextMaintenanceDate",
+        "assignedEngineer",
+        "priority",
+        "status",
+        "instructions",
+        "workPerformed",
+        "faultsDiscovered",
+        "partsReplaced",
+        "completionDate",
+        "completedBy",
+        "postCondition",
+        "recommendations",
+        "ownerUid",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FaultReport": {
+      "title": "FaultReport",
+      "description": "Clinical or engineering fault report logged against medical equipment.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "faultCode": {
+          "type": "string",
+          "pattern": "^[A-Z0-9\\-]+$",
+          "maxLength": 32
+        },
+        "equipmentId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "assetId": {
+          "type": "string",
+          "pattern": "^[A-Z0-9\\-]+$",
+          "maxLength": 32
+        },
+        "equipmentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "reportingDepartment": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "reportedBy": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "reportedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "maxLength": 20
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Reported",
+            "Under Investigation",
+            "Awaiting Parts",
+            "Under Repair",
+            "Resolved",
+            "Closed"
+          ],
+          "maxLength": 32
+        },
+        "assignedEngineer": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "resolutionNotes": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "resolutionDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "ownerUid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "faultCode",
+        "equipmentId",
+        "assetId",
+        "equipmentName",
+        "reportingDepartment",
+        "reportedBy",
+        "reportedAt",
+        "description",
+        "severity",
+        "status",
+        "assignedEngineer",
+        "resolutionNotes",
+        "resolutionDate",
+        "ownerUid",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "HistoryEvent": {
+      "title": "HistoryEvent",
+      "description": "Immutable chronological equipment audit trail record.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "equipmentId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "assetId": {
+          "type": "string",
+          "pattern": "^[A-Z0-9\\-]+$",
+          "maxLength": 32
+        },
+        "eventType": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "timestamp": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "responsibleUser": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "previousValue": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "newValue": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "ownerUid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "equipmentId",
+        "assetId",
+        "eventType",
+        "timestamp",
+        "responsibleUser",
+        "previousValue",
+        "newValue",
+        "notes",
+        "ownerUid",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private authenticated user profile documents with RBAC roles."
+    },
+    "/equipment/{equipmentId}": {
+      "schema": { "$ref": "#/entities/EquipmentAsset" },
+      "description": "Registered biomedical equipment assets scoped by ownerUid."
+    },
+    "/movements/{movementId}": {
+      "schema": { "$ref": "#/entities/EquipmentMovement" },
+      "description": "Equipment movement and chain-of-custody records scoped by ownerUid."
+    },
+    "/maintenanceTasks/{taskId}": {
+      "schema": { "$ref": "#/entities/MaintenanceTask" },
+      "description": "Scheduled and completed biomedical maintenance tasks scoped by ownerUid."
+    },
+    "/faultReports/{faultId}": {
+      "schema": { "$ref": "#/entities/FaultReport" },
+      "description": "Reported equipment faults and repair resolutions scoped by ownerUid."
+    },
+    "/historyEvents/{eventId}": {
+      "schema": { "$ref": "#/entities/HistoryEvent" },
+      "description": "Immutable chronological equipment history events scoped by ownerUid."
+    }
+  }
+}

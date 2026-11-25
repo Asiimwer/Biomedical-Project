@@ -1,0 +1,6 @@
+{
+  "name": "Biomedical Equipment Management System (BEMS)",
+  "description": "Centralized hospital biomedical equipment asset tracking, accountability, preventive maintenance scheduling, fault reporting, and 3D equipment inspection platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
